@@ -4,25 +4,26 @@ BY DOWNLOADING, INSTALLING, COPYING OR USING THE SOFTWARE, YOU ARE AGREEING TO B
 IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THE AGREEMENT, PROMPTLY RETURN AND DO NOT USE THE SOFTWARE.
 */
 
-#ifndef __DSPOTTERSDK_API_H
-#define __DSPOTTERSDK_API_H
+
+#ifndef DSPOTTERSDK_API_H__
+#define DSPOTTERSDK_API_H__
 
 #if defined(_WIN32)
 	#ifdef DSpotterDll_EXPORTS
 		#define DSPDLL_API __declspec(dllexport)
-	#endif
-#endif
+	#endif	// DSpotterDll_EXPORTS
+#endif	// _WIN32
 
 #ifndef DSPDLL_API
 #define DSPDLL_API
-#endif
+#endif	// DSPDLL_API
 
 #include "base_types.h"
 #include "DSpotterSDKApi_Const.h"
 
 #ifdef __cplusplus
 extern "C"{
-#endif
+#endif	// __cplusplus
 
 // lpbyCYBase(IN): The background model, contents of CYBase.mod.
 // lppbyModel(IN): The command model.
@@ -95,36 +96,12 @@ DSPDLL_API INT DSpotter_GetResultMapID(HANDLE hDSpotter);
 DSPDLL_API const char *DSpotter_VerInfo(void);
 DSPDLL_API const char *DSpotter_Ver(void);
 
+DSPDLL_API INT DSpotter_SetEnvPercep(HANDLE hDSpotter, INT nLevel, INT nGroupIdx);	// 0 ~ 10. 0: disabled
+DSPDLL_API INT DSpotter_GetEnvPercep(HANDLE hDSpotter, INT nGroupIdx);	// 0 ~ 10. 0: disabled
+
 /************************************************************************/
-//  Threshold Adjust API                                                                   
+//  Threshold Adjust API
 /************************************************************************/
-// Purpose: Set model rejection level
-// hDSpotter(IN): a handle of the recognizer
-// nRejectionLevel(IN): rejection level
-// Return: Success or error code
-// Deprecated from v2.2.7
-DSPDLL_API INT DSpotter_SetRejectionLevel(HANDLE hDSpotter, INT nRejectionLevel);
-
-// Purpose: Set model SG rejection level
-// hDSpotter(IN): a handle of the recognizer
-// nRejectionLevel(IN): SG rejection level
-// Return: Success or error code
-// Deprecated from v2.2.7
-DSPDLL_API INT DSpotter_SetSgLevel(HANDLE hDSpotter, INT nRejectionLevel);
-
-// Purpose: Set model FIL rejection level
-// hDSpotter(IN): a handle of the recognizer
-// nRejectionLevel(IN): FIL rejection level
-// Return: Success or error code
-// Deprecated from v2.2.7
-DSPDLL_API INT DSpotter_SetFilLevel(HANDLE hDSpotter, INT nRejectionLevel);
-
-// Purpose: Set engine response time
-// hDSpotter(IN): a handle of the recognizer
-// nResponseTime(IN): response time
-// Return: Success or error code
-// Deprecated from v2.2.7, please use DSpotter_SetEndSil
-DSPDLL_API INT DSpotter_SetResponseTime(HANDLE hDSpotter, INT nResponseTime);
 
 // Purpose: Set engine energy threshold
 // hDSpotter(IN): a handle of the recognizer
@@ -136,37 +113,6 @@ DSPDLL_API INT DSpotter_SetEnergyTH(HANDLE hDSpotter, INT nEnergyTH);
 // hDSpotter(IN): a handle of the recognizer
 // Return: energy threshold(RMS) or error code
 DSPDLL_API INT DSpotter_GetEnergyTH(HANDLE hDSpotter);
-
-// Purpose: Set Cmd response time
-// hDSpotter(IN): a handle of the recognizer
-// nCmdIdx(IN): the command ID. It is 0 based
-// nResponseTime(IN): response time
-// Return: Success or error code
-// Deprecated from v2.2.7, please use DSpotter_SetCmdEndSil
-DSPDLL_API INT DSpotter_SetCmdResponseTime(HANDLE hDSpotter, INT nCmdIdx, INT nResponseTime);
-
-// Purpose: Get Cmd response time
-// hDSpotter(IN): a handle of the recognizer
-// nCmdIdx(IN): the command ID. It is 0 based
-// Return: response time or error code
-// Deprecated from v2.2.7, please use DSpotter_GetCmdEndSil
-DSPDLL_API INT DSpotter_GetCmdResponseTime(HANDLE hDSpotter, INT nCmdIdx);
-
-// Purpose: Set Cmd reward
-// hDSpotter(IN): a handle of the recognizer
-// nCmdIdx(IN): the command ID. It is 0 based
-// nReward(IN): reward
-// Return: Success or error code
-// Deprecated from v2.2.7, please use DSpotter_SetCmdConfiReward
-DSPDLL_API INT DSpotter_SetCmdReward(HANDLE hDSpotter, INT nCmdIdx, INT nReward);
-
-// Purpose: Get Cmd reward
-// hDSpotter(IN): a handle of the recognizer
-// nCmdIdx(IN): the command ID. It is 0 based
-// *pnErr(IN/Out): error code
-// Return: reward
-// Deprecated from v2.2.7, please use DSpotter_GetCmdConfiReward
-DSPDLL_API INT DSpotter_GetCmdReward(HANDLE hDSpotter, INT nCmdIdx, INT *pnErr);
 
 // Purpose: Set Cmd Confi. reward
 // hDSpotter(IN): a handle of the recognizer
@@ -255,9 +201,9 @@ DSPDLL_API INT DSpotterAGC_SetIncGainThrd(HANDLE hDSpotter, INT nLowerThrd);
 // lpParam: Parameters.
 #if defined(_WIN32)
 typedef INT (__stdcall *DSpotterAGC_GetAGCData_Callback)(SHORT *lpsOutputSample, INT nSampleNum, VOID *lpParam);
-#else
+#else	// _WIN32
 typedef INT (*DSpotterAGC_GetAGCData_Callback)(SHORT *lpsOutputSample, INT nSampleNum, VOID *lpParam);
-#endif
+#endif	// _WIN32
 
 // Purpose: Set Callback to get data after AGC.
 // hDSpotter(IN): a handle of the recognizer
@@ -265,8 +211,11 @@ typedef INT (*DSpotterAGC_GetAGCData_Callback)(SHORT *lpsOutputSample, INT nSamp
 // lpParam(IN): Parameters
 DSPDLL_API INT DSpotterAGC_SetCallback(HANDLE hDSpotter, DSpotterAGC_GetAGCData_Callback lpfnCallback, VOID *lpParam);
 
+
+
+
 #ifdef __cplusplus
 }
-#endif
+#endif	// __cplusplus
 
-#endif // __DSPOTTERSDK_API_H
+#endif	// DSPOTTERSDK_API_H__

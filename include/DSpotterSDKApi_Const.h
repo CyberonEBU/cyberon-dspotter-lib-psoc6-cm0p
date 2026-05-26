@@ -4,8 +4,8 @@ BY DOWNLOADING, INSTALLING, COPYING OR USING THE SOFTWARE, YOU ARE AGREEING TO B
 IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THE AGREEMENT, PROMPTLY RETURN AND DO NOT USE THE SOFTWARE.
 */
 
-#ifndef __DSPOTTER_SDK_API_CONST_H__
-#define __DSPOTTER_SDK_API_CONST_H__
+#ifndef DSPOTTER_SDK_API_CONST_H__
+#define DSPOTTER_SDK_API_CONST_H__
 
 
 #define DSPOTTER_SUCCESS						(     0 )
@@ -15,7 +15,7 @@ IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THE AGREEMENT, PROMPTLY RETURN AND DO
 
 
 /************************************************************************/
-// Recognition type                                                                
+// Recognition type
 /************************************************************************/
 #define DSPOTTER_RecogType_Unknown				(0)
 #define DSPOTTER_RecogType_Passed				(1)
@@ -28,14 +28,26 @@ IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THE AGREEMENT, PROMPTLY RETURN AND DO
 /************************************************************************/
 
 /************************************************************************/
-// FFT type                                                                
+// FFT type
 /************************************************************************/
 #define DSPOTTER_FFTTYPE_NOSET					(0)
 #define DSPOTTER_FFTTYPE_COMPLEX				(1)
 #define DSPOTTER_FFTTYPE_REAL					(2)
 
 /************************************************************************/
-// Error code                                                                  
+// DotProd type
+/************************************************************************/
+#define DSPOTTER_DotProdTYPE_NOSET					(0)
+#define DSPOTTER_DotProdTYPE_32x16_32x8				(1)
+#define DSPOTTER_DotProdTYPE_16x16_16x8				(2)
+
+/************************************************************************/
+// Command Map ID
+/************************************************************************/
+#define DSPOTTER_Default_MapID				        (-1)	// If not given MapID, DSpotter_GetResultMapID() will get this
+
+/************************************************************************/
+// Error code
 /************************************************************************/
 
 #define DSPOTTER_ERR_IllegalHandle				( DSPOTTER_ERR_SDKError -   1 )
@@ -73,5 +85,12 @@ IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THE AGREEMENT, PROMPTLY RETURN AND DO
 
 #define DSPOTTER_ERR_AGCError					( DSPOTTER_ERR_SDKError - 605 )
 
-#endif //__DSPOTTER_SDK_API_CONST_H__
+#define DSPOTTER_ERR_TextSDLoadLexFailed          ( DSPOTTER_ERR_SDKError - 700 )
+#define DSPOTTER_ERR_TextSDGetPronunciationFailed ( DSPOTTER_ERR_SDKError - 701 )
+#define DSPOTTER_ERR_TextSDTooLong                ( DSPOTTER_ERR_SDKError - 702 )
+
+
+#define DSPOTTER_ERR_UndefinedValue				( DSPOTTER_ERR_SDKError - 999 )
+
+#endif	// DSPOTTER_SDK_API_CONST_H__
 
